@@ -24,7 +24,6 @@ public class EmailEventListener {
     @JmsListener(destination = "zip-queue")
     public void subscribeEmailEvents(Message message) throws MessagingException, IOException, JMSException {
         BytesMessage bytesMessage = (BytesMessage) message;
-        String email = bytesMessage.getStringProperty("email");
         String fileName = bytesMessage.getStringProperty("fileName");
         int dataSize = (int) bytesMessage.getBodyLength();
         byte[] buffer = new byte[dataSize];
@@ -33,7 +32,7 @@ public class EmailEventListener {
         try (FileOutputStream fileOutput = new FileOutputStream(outputFile)) {
             fileOutput.write(buffer);
         }
-        emailSendService.sendSimpleMessage(email,outputFile);
+        emailSendService.sendSimpleMessage(bytesMessage,outputFile);
         outputFile.delete();
     }
 }
