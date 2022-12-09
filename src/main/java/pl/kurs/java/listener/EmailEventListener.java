@@ -32,7 +32,7 @@ public class EmailEventListener {
         try (FileOutputStream fileOutput = new FileOutputStream(outputFile)) {
             fileOutput.write(buffer);
         }
-        emailSendService.sendSimpleMessage(bytesMessage,outputFile);
+        emailSendService.sendSimpleMessage(bytesMessage, outputFile);
         outputFile.delete();
     }
 }
