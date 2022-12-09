@@ -25,10 +25,11 @@ public class EmailEventListener {
     public void subscribeEmailEvents(Message message) throws MessagingException, IOException, JMSException {
         BytesMessage bytesMessage = (BytesMessage) message;
         String email = bytesMessage.getStringProperty("email");
+        String fileName = bytesMessage.getStringProperty("fileName");
         int dataSize = (int) bytesMessage.getBodyLength();
-        byte[] buffer = new byte[8192];
+        byte[] buffer = new byte[dataSize];
         bytesMessage.readBytes(buffer, dataSize);
-        File outputFile = new File("dirCompressed.zip");
+        File outputFile = new File(fileName + ".zip");
         try (FileOutputStream fileOutput = new FileOutputStream(outputFile)) {
             fileOutput.write(buffer);
         }

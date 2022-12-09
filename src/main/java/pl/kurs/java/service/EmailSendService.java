@@ -26,7 +26,7 @@ public class EmailSendService {
         mimeMessageHelper.setTo(email);
         mimeMessageHelper.setSubject("Test");
         mimeMessageHelper.setText("text");
-        mimeMessageHelper.addAttachment("dirCompressed.zip", new ByteArrayResource(Files.readAllBytes(file.toPath())));
+        mimeMessageHelper.addAttachment(file.getName(), new ByteArrayResource(Files.readAllBytes(file.toPath())));
 
         javaMailSender.send(mimeMessage);
     }
