@@ -28,11 +28,11 @@ public class EmailEventListener {
         int dataSize = (int) bytesMessage.getBodyLength();
         byte[] buffer = new byte[dataSize];
         bytesMessage.readBytes(buffer, dataSize);
-        File outputFile = new File(fileName + ".zip");
+        File outputFile = new File(fileName);
         try (FileOutputStream fileOutput = new FileOutputStream(outputFile)) {
             fileOutput.write(buffer);
         }
-        emailSendService.sendSimpleMessage(bytesMessage,outputFile);
+        emailSendService.sendSimpleMessage(bytesMessage, outputFile);
         outputFile.delete();
     }
 }

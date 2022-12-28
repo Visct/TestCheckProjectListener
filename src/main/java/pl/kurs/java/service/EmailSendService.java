@@ -30,6 +30,7 @@ public class EmailSendService {
         mimeMessageHelper.setText(bytesMessage.getStringProperty("emailText"));
         mimeMessageHelper.addAttachment(file.getName(), new ByteArrayResource(Files.readAllBytes(file.toPath())));
 
+
         javaMailSender.send(mimeMessage);
     }
 }
